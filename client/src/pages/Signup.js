@@ -51,6 +51,7 @@ function Signup() {
         body: JSON.stringify({
           name: user_data.name,
           email: user_data.email,
+          password:user_data.password
         }),
       }).then((res) => console.log(res));
       navigate("/dashboard")

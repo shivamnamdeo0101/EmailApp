@@ -28,6 +28,10 @@
 .form_comp>input{
     padding: .6rem;
 }
+
+.form_comp>textarea{
+    padding: .6rem;
+}
 .form_comp>button{
     cursor: pointer;
     padding: 10px 12px;

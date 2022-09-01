@@ -4,7 +4,7 @@ import LoginForm from "./loginform";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-
+import SendEmail from "./pages/SendEmail";
 const App = () => {
   return (
     <Router>
@@ -13,6 +13,7 @@ const App = () => {
         <Route exact path="/signup/" element={<Signup />} />
         <Route exact path="/dashboard/" element={<Dashboard />} />
         <Route exact path="/google_login/" element={<LoginForm />} />
+        <Route exact path="/send-email/:email" element={<SendEmail />} />
         
       </Routes>
     </Router>
