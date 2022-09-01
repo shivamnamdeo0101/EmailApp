@@ -4,11 +4,10 @@ import emailjs from '@emailjs/browser';
 
 const SendEmail = () => {
   let { email } = useParams();
-    
   const [form_data, setform_data] = useState({
     email:email
   });
-
+  
   const sendMail = () => {
     var templateParams = {
         name: "Shivam",
