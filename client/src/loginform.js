@@ -1,56 +1,3 @@
-// import React, { useState } from "react";
-
-// import "./login.css";
-
-// const LoginForm = () => {
-
-//   const[email,setEmail] = useState("");
-//   const[password,setPassword] = useState("");
-  
-//   const[allEntry, setAllEntry] = useState([]);
-
-//   const submitForm = (event) => {
-//     //Prevent page reload
-//     event.preventDefault();
-
-//     const newEntry = { email: email, password: password };
-//     setAllEntry([ ...allEntry, newEntry]);
-//     console.log(allEntry);
-//   }
-
-// return(
-//   <>
-//   <form action ="" onSubmit={submitForm} >
-
-             
-//         <div className="title">Sign In</div>
-
-//         <div className="loginform">
-//           <label>Gmail </label>
-//           <input type="text" name="email" autoComplete="off"
-//           value ={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//             />
-//         </div>
-
-//          <div className="loginform">
-//           <label>Password </label>
-//           <input type="password" name="password" autoComplete="off"
-//            value ={password}
-//            onChange={(e) => setPassword(e.target.value)}
-//              />
-//         </div>
-
-//         <div className="button-container">
-//           <input type="submit" />
-//         </div>
-//       </form>
-//       </>
-//   );
-// }
-
-// export default LoginForm;
-
 
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
@@ -58,6 +5,8 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 const clientId = "101232111464-m9pm4j1mha6q70pgbhicl067an5062dj.apps.googleusercontent.com";
 
 function LoginForm() {
+
+    const [user_data, setuser_data] = useState({});
 
     const [showloginButton, setShowloginButton] = useState(true);
     const [showlogoutButton, setShowlogoutButton] = useState(false);
@@ -104,6 +53,12 @@ function LoginForm() {
     return (
         <div className=''>
 
+
+                
+
+
+            
+{/*             
             <button onClick={()=>make_req()}>Button</button>
             { showloginButton ?
                 <GoogleLogin
@@ -122,7 +77,7 @@ function LoginForm() {
                     onLogoutSuccess={onSignoutSuccess}
                 >
                 </GoogleLogout> : null
-            }
+            } */}
         </div>
     );
 }
