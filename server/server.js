@@ -1,12 +1,18 @@
 const express = require("express");
-const app = express();
-
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
 const morgan = require("morgan")
 const cors = require("cors");
 
+const app = express(); 
+
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors({
+    origin:"http://localhost:3000"
+}));
+
 
 
 //database connection

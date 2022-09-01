@@ -69,8 +69,8 @@ function LoginForm() {
             method: 'post',
             headers: {'Content-Type':'application/json'},
             body: {
-                "name":"Sonal Lashlkare",
-                "email":"sonal@gmail.com"
+                "name":"Shivam",
+                "email":"shivam@gmail.com"
             }
            });
         setShowloginButton(false);
@@ -78,13 +78,13 @@ function LoginForm() {
     };
 
     const make_req = ()=>{
-        fetch('http://localhost:3001/users', {
+        fetch('/users', {
             method: 'post',
             headers: {'Content-Type':'application/json'},
-            body: {
-                "name":"Sonal Lashlkare",
-                "email":"sonal@gmail.com"
-            }
+            body: JSON.stringify({
+                "name":"Shivam Namdeo",
+                "email":"shivam@gmail.com"
+            })
            })
            .then(res=>console.log(res))
     }
@@ -102,7 +102,7 @@ function LoginForm() {
     };
 
     return (
-        <div>
+        <div className=''>
 
             <button onClick={()=>make_req()}>Button</button>
             { showloginButton ?
