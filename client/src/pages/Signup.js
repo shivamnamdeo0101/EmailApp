@@ -56,6 +56,9 @@ function Signup() {
       }).then((res) => console.log(res));
       navigate("/dashboard")
   }
+
+
+  
   return (
     <div className="page">
       <h2>Sign Up </h2>
@@ -69,7 +72,7 @@ function Signup() {
           <input type="text" placeholder="Enter your name" name="name" value={user_data.name} onChange={handleChange}/>
         </div>
         <div className="form_comp">
-          <label>Enter Password</label>
+          <label>Enter Password</label> 
           <input
             type="password"
             placeholder="Enter your password"

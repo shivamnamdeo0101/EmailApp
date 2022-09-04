@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const Contact = require("../model/Contact");
+
 const user_schema = mongoose.Schema({
     name: {
         type: String,
@@ -16,7 +18,10 @@ const user_schema = mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    contact: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contact' }],
+        
+    
 })
 
 

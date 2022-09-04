@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 const SendEmail = () => {
   let { email } = useParams();
   const [form_data, setform_data] = useState({
-    email:email
+    to_email:email
   });
   
   const sendMail = () => {
@@ -14,10 +14,10 @@ const SendEmail = () => {
         message:form_data.message,
         to_email:form_data.to_email,
         subject:form_data.subject,
-        from_email:"shivamnamdeo0101@gmail.com",
+        from_email:email,
     };
 
-    emailjs.send("service_mwiawon", "template_2v449ll", templateParams,"HImJxcyeTjKN2nrRl").then(
+    emailjs.send("service_z54eaz9", "template_2v449ll", templateParams,"HImJxcyeTjKN2nrRl").then(
       function (response) {
         console.log("SUCCESS!", response.status, response.text);
       },
@@ -47,9 +47,9 @@ const SendEmail = () => {
           <input
             type="email"
             placeholder="Enter your email"
-            value={email}
-            name="from_email"
-            disabled
+            value={form_data.to_email}
+            name="to_email"
+            onChange={handleChange}
           />
         </div>
         
@@ -85,3 +85,6 @@ const SendEmail = () => {
 };
 
 export default SendEmail;
+
+
+

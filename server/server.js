@@ -107,6 +107,7 @@ require("./mongo")
 
 //Models
 require("./model/User");
+require("./model/Contact");
 
 //Middleware
 app.use(bodyParser.json())
