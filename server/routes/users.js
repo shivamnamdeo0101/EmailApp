@@ -15,9 +15,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:userId", async (req, res) => {
+router.get("/:email", async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.params.userId });
+    const user = await User.findOne({ email: req.params.email });
     res.send(user);
   } catch (error) {
     res.status(500);
@@ -52,9 +52,9 @@ router.get("/view-contact/:email", async (req, res) => {
   }
 });
 
-router.post("/add-contact/:id", async (req, res) => {
+router.post("/add-contact/:email", async (req, res) => {
   try {
-    const user = await User.findById({ _id: req.params.id});
+    const user = await User.findOne({ email: req.params.email});
 
     req.body.contact.map((val)=>{
       user.contact.push(val)
