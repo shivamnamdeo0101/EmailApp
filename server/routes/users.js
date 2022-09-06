@@ -37,6 +37,21 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+
+router.get("/view-contact/:email", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.params.email});
+
+    if (!user) {
+      res.send({ status: false, data: "User not found" });
+    } else {
+      res.send({ status: true, data: user });
+    }
+  } catch (error) {
+    res.status(500);
+  }
+});
+
 router.post("/add-contact/:id", async (req, res) => {
   try {
     const user = await User.findById({ _id: req.params.id});

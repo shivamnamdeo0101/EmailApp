@@ -5,6 +5,8 @@ import GoogleLogin from 'react-google-login';
 const Login = () => {
 
   const onLoginSuccess = (e)=>{
+
+    console.log(e)
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
