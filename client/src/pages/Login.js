@@ -1,103 +1,49 @@
-import React, { useState } from "react";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import React from 'react'
 import "../App.css";
-import { useNavigate } from "react-router-dom";
-const clientId = "101232111464-m9pm4j1mha6q70pgbhicl067an5062dj.apps.googleusercontent.com";
+import GoogleLogin from 'react-google-login';
 
-function Login() {
-  const navigate = useNavigate();
-  const [user_data, setuser_data] = useState({});
-  const [showloginButton, setShowloginButton] = useState(true);
-  const [showlogoutButton, setShowlogoutButton] = useState(false);
+const Login = () => {
 
+  const onLoginSuccess = (e)=>{
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
 
-  
+var raw = JSON.stringify({
+  "name": e.profileObj.name,
+  "email": e.profileObj.email,
+  "contact": [
+    
+  ]
+});
 
-  const onLoginSuccess = (res) => {
-    console.log("Login Su   ccess:", res.profileObj);
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
 
-    setuser_data(res.profileObj);
-
-    setShowloginButton(false);
-    setShowlogoutButton(true);
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setuser_data({
-      ...user_data,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleLogin = (e) => {
-    e.preventDefault()
-    fetch("/users/login", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: user_data.email,
-          password:user_data.password
-        }),
-      }).then((res) => {
-        if(res.status){
-          navigate("/dashboard")
-        }else{
-          alert("Email and password are incorrect.")
-        }
-      });
-     
-  };
-  const onLoginFailure = (res) => {
-    console.log("Login Failed:", res);
-  };
-
-  const onSignoutSuccess = () => {
-    alert("You have been logged out successfully");
-    console.clear();
-    setShowloginButton(true);
-    setShowlogoutButton(false);
-  };
-
-  console.log(user_data);
+fetch("http://localhost:3001/users/signup", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  }
+  const onLoginFailure = (e)=>{
+      console.log(e)
+  }
 
   return (
-    <div className="page">
-      <h2>Login </h2>
-      <form className="form_page" onSubmit={handleLogin}>
-        <div className="form_comp">
-          <label>Enter Email</label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={user_data.email}
-            name="email"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form_comp">
-          <label>Enter Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={user_data.password}
-            name="password"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form_comp">
-          <button type="submit">Login</button>
-        </div>
-
-        <div className="form_comp">
-          <div className="form_link">
-            <p>Don't have any account? </p>
-            <a href="/signup">Signup here</a>
-          </div>
-        </div>
-      </form>
+    <div className='page'>
+          <GoogleLogin
+              clientId={"101232111464-m9pm4j1mha6q70pgbhicl067an5062dj.apps.googleusercontent.com"}
+              buttonText="Login with Google"
+              onSuccess={onLoginSuccess}
+              onFailure={onLoginFailure}
+              cookiePolicy={"single_host_origin"}
+              
+            />
     </div>
-  );
+  )
 }
-export default Login;
+
+export default Login

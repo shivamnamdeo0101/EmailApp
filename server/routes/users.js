@@ -5,16 +5,7 @@ const mongoose = require("mongoose");
 const User = require("../model/User.js");
 
 
-const createContact = function (email, contact) {
-  return Contact.create(contact).then((con) => {
-    console.log(con);
-    return User.findByIdAndUpdate(
-      email,
-      { $push: { contact: con._id } },
-      { new: true, useFindAndModify: false }
-    );
-  });
-};
+
 router.get("/", async (req, res) => {
   try {
     const users = await User.find({});
@@ -33,12 +24,11 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/signup", async (req, res) => {
   try {
     const user = new User();
     user.name = req.body.name;
     user.email = req.body.email;
-    user.password = req.body.password;
     user.contact = req.body.contact;
     await user.save();
     res.send(user);
@@ -47,25 +37,24 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/add-contact", async (req, res) => {
-    const user = new User();
-    user.email = req.body.email;
-    user.contact = req.body.contact;
+router.post("/add-contact/:id", async (req, res) => {
+  try {
+    const user = await User.findById({ _id: req.params.id});
+
+    req.body.contact.map((val)=>{
+      user.contact.push(val)
+    })
+
     user.save()
-      .then((result) => {
-        User.findOne({ email: user.email }, (err, user) => {
-            if (user) {
-                // The below two lines will add the newly saved review's 
-                // ObjectID to the the User's reviews array field
-                user.contact.push(contact);
-                user.save();
-                res.json({ message: 'Review created!' });
-            }
-        });
-      })
-      .catch((error) => {
-        res.status(500).json({ error });
-      });
+
+    if (!user) {
+      res.send({ status: false, data: "User not found" });
+    } else {
+      res.send({ status: true, data: user });
+    }
+  } catch (error) {
+    res.status(500);
+  }
 });
 
 router.post("/login", async (req, res) => {

@@ -12,14 +12,20 @@ const user_schema = mongoose.Schema({
         required: [true, "Email is required"],
 		trim: true,
 		lowercase: true,
-		unique: [true, "Email already exists"],
+		//unique: [true, "Email already exists"],
         
     },
-    password:{
-        type:String,
-        required:true
-    },
-    contact: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Contact' }],
+  
+    contact: [
+       {
+        email:{
+            type:String
+        },
+        title:{
+            type:String
+        }
+       }
+    ],
         
     
 })
